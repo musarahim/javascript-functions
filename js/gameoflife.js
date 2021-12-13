@@ -98,14 +98,13 @@ const calculateNext = (state) => {
       }
     }
   }
-  console.log(result);
   return result;
 };
 
 const iterate = (state, iterations) => {
-  const states = [state];
+  const states = [];
   for (let i = 0; i < iterations; i++) {
-    states.push(calculateNext(states[state.length - 1]));
+    states.push(calculateNext(state[i]));
   }
   return states;
 };
