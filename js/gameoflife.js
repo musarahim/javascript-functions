@@ -87,15 +87,18 @@ const willBeAlive = (cell, state) => {
     (contains.call(state, cell) && livingNeighbors.length === 2)
   );
 };
-
 const calculateNext = (state) => {
   const { bottomLeft, topRight } = corners(state);
-  let result = "";
+
+  let result = [];
   for (let y = topRight[1] + 1; y >= bottomLeft[1] - 1; y--) {
     for (let x = bottomLeft[0] - 1; x <= topRight[0] + 1; x++) {
-      result.concat(willBeAlive([x, y], state) ? [[x, y]] : []);
+      if (willBeAlive([x, y], state) === true) {
+        result.push([x, y]);
+      }
     }
   }
+  console.log(result);
   return result;
 };
 
@@ -109,7 +112,7 @@ const iterate = (state, iterations) => {
 
 const main = (pattern, iterations) => {
   const results = iterate(startPatterns[pattern], iterations);
-  result.array.forEach((element) => {
+  results.array.forEach((element) => {
     console.log(printCells(r));
   });
 };
